@@ -2,7 +2,8 @@ import React from 'react';
 import {
   StyleSheet,
   View,
-  Dimensions
+  Dimensions,
+  Text
 } from 'react-native';
 import _ from 'lodash';
 import {RkText, RkButton, RkStyleSheet} from 'react-native-ui-kitten';
@@ -49,7 +50,7 @@ export class NavBar extends React.Component {
           onPress={() => {
             this.props.navigation.goBack()
           }}>
-          <RkText rkType='awesome hero'>{FontAwesome.chevronLeft}</RkText>
+          <RkText rkType='awesome hero' style={styles.titletext}>{FontAwesome.chevronLeft}</RkText>
         </RkButton>
       }
       else {
@@ -59,7 +60,7 @@ export class NavBar extends React.Component {
           onPress={() => {
             this.props.navigation.navigate('DrawerOpen')
           }}>
-          <RkText rkType='awesome'>{FontAwesome.bars}</RkText>
+          <RkText rkType='awesome' style={styles.titletext}>{FontAwesome.bars}</RkText>
         </RkButton>
       }
     };
@@ -74,7 +75,7 @@ export class NavBar extends React.Component {
   _renderTitle(title, headerTitle) {
     if (headerTitle) {
       return (
-        <View style={styles.title} onLayout={onLayout}>{headerTitle}</View>);
+        <View style={styles.title} onLayout={onLayout}><RkText style={{color:styles.titletext.fontcolor}} numberOfLines={1}>{headerTitle}</RkText></View>);
     }
 
     const onLayout = (e) => {
@@ -85,7 +86,7 @@ export class NavBar extends React.Component {
 
     return (
       <View style={styles.title} onLayout={onLayout}>
-        <RkText>{title}</RkText>
+        <RkText style={styles.titletext}>{title}</RkText>
       </View>
     )
   }
@@ -108,8 +109,8 @@ let styles = RkStyleSheet.create(theme => ({
   layout: {
     backgroundColor: theme.colors.screen.base,
     paddingTop: UIConstants.StatusbarHeight,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: theme.colors.border.base
+    //borderBottomWidth: StyleSheet.hairlineWidth,
+    // borderBottomColor: theme.colors.border.base
   },
   container: {
     flexDirection: 'row',
@@ -133,6 +134,10 @@ let styles = RkStyleSheet.create(theme => ({
     ...StyleSheet.absoluteFillObject,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: theme.colors.screen.background
+  },
+  titletext:{
+    color: theme.colors.screen.fontcolor
   },
   menu: {
     width: 40

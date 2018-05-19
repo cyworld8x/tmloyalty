@@ -1,4 +1,5 @@
 export * from './avatar';
+export {UserInformationCard} from './avatar/userinformationcard';
 export * from './gradientButton';
 export * from './charts';
 export * from './socialBar';

@@ -311,9 +311,9 @@ export const MainRoutes = [
 
 let menuRoutes = _.cloneDeep(MainRoutes);
 menuRoutes.unshift({
-  id: 'CategoryPage',
+  id: 'HomePage',
   title: 'Start',
-  screen: Screens.CategoryPage,
+  screen: Screens.HomePage,
   children: []
 },);
 

@@ -13,7 +13,9 @@ const Colors = {
   fadedForeground: '#ffffffdd',
 
   boldBackground: '#090f3f',
-  background: '#0a1142',
+  background: '#0a1142',  
+  backgroundHeader: '#0a1142',
+  textHeader:'#ffffff',
   alterBackground: '#12194d',
   overlayBackground: '#00000057',
   neutralBackground: '#2f396b',
@@ -93,6 +95,8 @@ export const DarkKittenTheme = {
     },
     screen: {
       base: Colors.background,
+      background: Colors.backgroundHeader,
+      fontcolor: Colors.textHeader,
       alter: Colors.alterBackground,
       scroll: Colors.background,
       bold: Colors.boldBackground,

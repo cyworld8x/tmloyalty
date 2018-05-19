@@ -14,8 +14,8 @@ const Colors = {
   highlight: '#bcbcbc',
 
   background: '#ffffff',  
-  backgroundHeader: '#ffffff',
-  textHeader: '#212121',
+  backgroundHeader: '#303b46',
+  textHeader: '#ababab',
   alterBackground: '#f2f2f2',
   overlayBackground: '#00000057',
   neutralBackground: '#f2f2f2',
@@ -76,7 +76,7 @@ const Fonts = {
 
 const FontBaseValue = scale(18);
 
-export const KittenTheme = {
+export const TmTheme = {
   name: 'light',
   colors: {
     fontcolorhtml: Colors.fontColorHtml,
@@ -99,16 +99,15 @@ export const KittenTheme = {
       background: Colors.background,
       label: Colors.secondaryForeground,
       placeholder: Colors.secondaryForeground,
-    },    
+    },
     screen: {
       base: Colors.background,
-      header: Colors.backgroundHeader,
       alter: Colors.alterBackground,
       scroll: Colors.alterBackground,
       bold: Colors.alterBackground,
       overlay: Colors.overlayBackground,
       background: Colors.backgroundHeader,
-      fontcolor: Colors.textHeader,
+      fontcolor: Colors.textHeader
     },
     button: {
       back: Colors.background,

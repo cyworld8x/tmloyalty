@@ -12,12 +12,15 @@ import {
 } from 'react-native-ui-kitten'
 import {ProgressBar} from '../../components';
 import {
+  DarkKittenTheme
+} from '../../config/darkTheme';
+import {
   KittenTheme
 } from '../../config/theme';
 
 import {
-  DarkKittenTheme
-} from '../../config/darkTheme';
+  TmTheme
+} from '../../config/tmTheme';
 import {NavigationActions} from 'react-navigation';
 import {scale, scaleModerate, scaleVertical} from '../../utils/scale';
 
@@ -27,9 +30,12 @@ import { connect } from 'react-redux';
 import { loadingDataStorage, saveSettings, loadSettings } from '../../api/actionCreators';
 
 import StoragePosts from '../../api/storagePosts';
+
+import UserStorage from '../../api/userStorage';
 import NetInfoHelper from '../../utils/netInfoHelper'
 import NotificationHelper from '../../utils/notificationHelper'
 import EncryptHelper from '../../utils/encryptHelper'
+import Facebook from './Facebook'
 class SplashScreen extends React.Component {
 
   constructor(props) {
@@ -40,6 +46,7 @@ class SplashScreen extends React.Component {
     }
 
     this.loadingServerSettings = this.loadingServerSettings.bind(this);
+    this.FBLoginCallback = this.FBLoginCallback.bind(this);
   }
 
   loadingServerSettings()
@@ -146,11 +153,12 @@ class SplashScreen extends React.Component {
 		this.loadingServerSettings();
 
     StatusBar.setHidden(true, 'none');
-    RkTheme.setTheme(KittenTheme);
-
+    RkTheme.setTheme(TmTheme);
+    var $this= this;
     this.timer = setInterval(() => {
       if (this.state.progress == 1 && this.state.isLoadingDataStorage == false) {
         clearInterval(this.timer);
+        //Facebook.GetUserInfo_FBGraphRequest('id, email,name, picture.type(large)',$this.FBLoginCallback,$this.FBLoginCallback);
         setTimeout(() => {
           StatusBar.setHidden(false, 'slide');
           let toHome = NavigationActions.reset({
@@ -171,6 +179,32 @@ class SplashScreen extends React.Component {
 
   }
 
+  FBLoginCallback(error, result) {
+    if (error) {
+      //console.error(error);
+      this.setState({
+        showLoadingModal: false,
+      });
+    } else {
+      setTimeout(() => {
+        StatusBar.setHidden(false, 'slide');
+        let toHome = NavigationActions.reset({
+          index: 0,
+          actions: [NavigationActions.navigate({routeName: 'Home'})]
+        });
+        this.props.navigation.dispatch(toHome)
+      }, timeFrame);
+      NotificationHelper.Notify(JSON.stringify(result));
+      Facebook.LogOut();
+      UserStorage.saveFacebookAccessToken(result);
+      //console.error(result);
+      
+      // Retrieve and save user details in state. In our case with 
+      // Redux and custom action saveUser
+      //console.error(result);
+     
+    }
+  }
   render() {
     let width = Dimensions.get('window').width;
     return (
